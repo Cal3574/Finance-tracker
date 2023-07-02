@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "daisyui": "^3.1.6",
+    "prisma": "^4.16.1"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.16.1",
+    "next-auth": "^4.22.1"
+  }
+}
