@@ -1,15 +1,24 @@
 import { NextPage } from "next";
 import Input from "../components/inputs/Input";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { returnFirstName } from "@/utils/ReturnFirstName";
 
 interface pageProps {}
 
-const page: NextPage<pageProps> = ({}) => {
+const page: NextPage<pageProps> = async ({}) => {
+  const session = await getServerSession(authOptions);
+  console.log(session);
+  if (!session) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div className="h-screen">
       <div className="flex mt-10 text-slate-200 flex-col items-center mx-auto md:mx-10 md:items-start">
         <div className="">
           <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
-            Good Morning, Callum
+            Good Morning, {returnFirstName(session?.user?.name)}
           </h1>
         </div>
         <p className="text-sm mt-1">Welcome back, nice to see you again!</p>

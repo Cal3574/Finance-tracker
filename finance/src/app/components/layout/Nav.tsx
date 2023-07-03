@@ -1,9 +1,14 @@
 "use client";
 import { FC } from "react";
 import { signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+
 interface NavProps {}
 
 const Nav: FC<NavProps> = ({}) => {
+  const { data: session, status } = useSession();
+
   return (
     <div className="navbar bg-[#CCDBDC]">
       <div className="flex-1">
@@ -13,7 +18,7 @@ const Nav: FC<NavProps> = ({}) => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <img src={session?.user.image} />
             </div>
           </label>
           <ul
@@ -30,7 +35,7 @@ const Nav: FC<NavProps> = ({}) => {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a onClick={() => signOut()}>Logout</a>
             </li>
           </ul>
         </div>

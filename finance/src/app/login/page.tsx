@@ -8,10 +8,14 @@ interface pageProps {}
 
 const page: NextPage<pageProps> = async ({}) => {
   const session = await getServerSession(authOptions);
-  console.log(session);
   return (
-    <div className="flex justify-center p-10">
-      <Button />
+    <div className="flex items-center p-10 h-screen flex-col gap-4">
+      <div>
+        <h1 className="text-4xl text-slate-200">Sign In</h1>
+      </div>
+      <div>
+        <Button />
+      </div>
     </div>
   );
 };
