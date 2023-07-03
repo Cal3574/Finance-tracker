@@ -3,14 +3,15 @@ import Input from "../components/inputs/Input";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { returnFirstName } from "@/utils/ReturnFirstName";
+import { redirect } from "next/navigation";
 
 interface pageProps {}
 
 const page: NextPage<pageProps> = async ({}) => {
   const session = await getServerSession(authOptions);
-  console.log(session);
+
   if (!session) {
-    return <div>loading...</div>;
+    return redirect("/api/auth/signin?callbackUrl=%2Fdashboard");
   }
 
   return (

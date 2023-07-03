@@ -2,7 +2,6 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
-import CredentialsProvider from "next-auth/providers/credentials";
 
 const prisma = new PrismaClient();
 
@@ -16,6 +15,18 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   secret: process.env.SECRET,
+  callbacks: {
+    async jwt({ token, trigger, session }) {
+      if (trigger === "update" && session?.user) {
+        token.user = session.user;
+      }
+      return token;
+    },
+  },
+
+  pages: {
+    signIn: "/login",
+  },
 
   session: {
     strategy: "jwt",
