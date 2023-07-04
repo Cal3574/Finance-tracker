@@ -10,11 +10,16 @@ const Nav: FC<NavProps> = ({}) => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="navbar bg-[#CCDBDC]">
-      <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl">FinanceTrack</a>
+    <div className="top-nav bg-[#2D325A] inset-x-0 top-0 flex justify-between px-4 h-24 mt-4 mx-4 rounded-t-3xl">
+      <div className="flex-1 mt-4 flex-col">
+        <a className=" normal-case text-xl">FinanceTrack</a>
+        <div className="mt-2">
+          <h1 className="normal-case text-2xl">
+            {/* Welcome back, {session?.user.name}! */}
+          </h1>
+        </div>
       </div>
-      <div className="flex-none gap-2">
+      <div className="flex-none gap-2 mt-4">
         {session && session.user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

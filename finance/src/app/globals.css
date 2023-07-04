@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-color: #003249;
+  background-color: #1f213f;
+  font-family: "Trebuchet MS";
 }

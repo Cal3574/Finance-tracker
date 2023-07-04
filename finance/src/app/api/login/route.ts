@@ -25,7 +25,7 @@ export async function POST(request: Request) {
       token,
     };
 
-    console.log(result);
+    console.log(result, " result");
     return new Response(JSON.stringify(result));
   } else {
     return new Response(

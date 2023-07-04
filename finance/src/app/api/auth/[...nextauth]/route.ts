@@ -5,13 +5,8 @@ import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "../../../../../db";
 
 const handler = NextAuth({
-  adapter: PrismaAdapter(prisma),
-  secret: process.env.SECRET_KEY,
+  // adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "Credentials",
