@@ -5,6 +5,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const accessToken = request.headers.get("authorization");
+  console.log(accessToken, "token here");
 
   if (!accessToken || !verifyJwtAccessToken(accessToken)) {
     return new Response(
@@ -21,7 +22,7 @@ export async function GET(
   } else {
     const allUserSpends = await prisma.spendings.findMany({
       where: {
-        id: Number(params.id),
+        userId: Number(params.id),
       },
     });
     return new Response(JSON.stringify(allUserSpends));

@@ -5,6 +5,7 @@ import { authOptions } from "@/lib/auth";
 import { returnFirstName } from "@/utils/ReturnFirstName";
 import { redirect } from "next/navigation";
 import RecentSpends from "../components/recentSpends/RecentSpends";
+import MonthlySpendingPieChart from "../components/monthlySpendingChart/MonthlySpendingPieChart";
 
 interface pageProps {}
 
@@ -16,8 +17,9 @@ const page: NextPage<pageProps> = async ({}) => {
   }
 
   return (
-    <div className="h-screen flex flex-wrap">
+    <div className="h-screen flex flex-wrap gap-y-0">
       <RecentSpends />
+      <MonthlySpendingPieChart />
     </div>
   );
 };

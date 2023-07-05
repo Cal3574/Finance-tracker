@@ -10,7 +10,7 @@ const Footer: FC<FooterProps> = ({}) => {
     <nav className="bottom-nav bg-[#2D325A] fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-2 h-20 m-4 rounded-b-3xl">
       <div className="max-w-7xl mx-auto flex gap-10">
         <a
-          href="#"
+          href="/dashboard"
           className="text-white flex flex-col items-center gap-2 w-20 hover:text-teal-200"
         >
           <AiFillHome size={26} />

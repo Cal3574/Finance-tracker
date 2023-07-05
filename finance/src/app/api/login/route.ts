@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     },
   });
 
+  console.log(user, " user");
   if (user && (await bycrypt.compare(body.password, user.password))) {
     const { password, ...userWithoutPass } = user;
     const token = signJwtAccessToken({
@@ -25,9 +26,9 @@ export async function POST(request: Request) {
       token,
     };
 
-    console.log(result, " result");
     return new Response(JSON.stringify(result));
   } else {
+    console.log("Invalid email or password");
     return new Response(
       JSON.stringify({
         error: "Invalid email or password",
