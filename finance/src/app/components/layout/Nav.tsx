@@ -10,12 +10,12 @@ const Nav: FC<NavProps> = ({}) => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="top-nav bg-[#2D325A] inset-x-0 top-0 flex justify-between px-4 h-24 mt-4 mx-4 rounded-t-3xl">
+    <div className="top-nav bg-[#2D325A] inset-x-0 top-0 flex justify-between px-4 h-24 mt-4 mx-0 m-0 ">
       <div className="flex-1 mt-4 flex-col">
         <a className=" normal-case text-xl">FinanceTrack</a>
         <div className="mt-2">
-          <h1 className="normal-case text-2xl">
-            {/* Welcome back, {session?.user.name}! */}
+          <h1 className="normal-case text-md">
+            Welcome back, {session?.user.name}!
           </h1>
         </div>
       </div>
@@ -24,7 +24,9 @@ const Nav: FC<NavProps> = ({}) => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={session?.user.image} />
+                <img
+                  src={`https://api.dicebear.com/6.x/pixel-art/svg?seed=${session.user.name}`}
+                />
               </div>
             </label>
             <ul

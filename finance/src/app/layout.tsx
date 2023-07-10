@@ -4,7 +4,7 @@ import Footer from "./components/layout/Footer";
 import Nav from "./components/layout/Nav";
 import "./globals.css";
 import { Inter } from "next/font/google";
-
+import Input from "./components/inputs/Input";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -22,6 +22,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Nav />
+          <Input />
+
           {children}
           <Footer />
         </Providers>

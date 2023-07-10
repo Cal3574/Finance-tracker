@@ -84,7 +84,7 @@ const MonthlySpendingPieChart = () => {
   };
 
   return (
-    <div className="bg-[#2D325A] rounded-xl h-80 w-[32rem] m-4 flex flex-col mb-44">
+    <div className="bg-[#2D325A] rounded-xl h-80 md:w-[26rem] w-full m-4 flex flex-col ">
       <div>
         <h1 className="text-2xl text-start m-2 p-4">Current Month Spending</h1>
       </div>

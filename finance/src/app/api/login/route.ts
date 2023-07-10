@@ -6,14 +6,18 @@ interface RequestBody {
   password: string;
 }
 
+interface UserProps {}
+
 export async function POST(request: Request) {
   const body = (await request.json()) as RequestBody;
 
-  const user = await prisma.user.findUnique({
+  const user: any = await prisma.user.findUnique({
     where: {
       email: body.email,
     },
   });
+
+  console.log(user);
 
   console.log(user, " user");
   if (user && (await bycrypt.compare(body.password, user.password))) {

@@ -1,7 +1,13 @@
+import { returnDate } from "@/utils/returnDate";
 import { returnTime } from "@/utils/returnTime";
 import { FC } from "react";
 import { IoCafeOutline } from "react-icons/io5";
-interface TransactionCardProps {}
+interface TransactionCardProps {
+  amount: number;
+  category: string;
+  date: string;
+  location: string;
+}
 
 const TransactionCard: FC<TransactionCardProps> = ({
   amount,
@@ -20,7 +26,8 @@ const TransactionCard: FC<TransactionCardProps> = ({
         <p className="text-[10px] text-slate-400">{category}</p>
       </div>
 
-      <div className="text-[10px] flex items-center mr-4 absolute right-0 mt-auto mb-auto top-0 bottom-0">
+      <div className="text-[10px] flex flex-col justify-center gap-2 items-center mr-4 absolute right-0 mt-auto mb-auto top-0 bottom-0 ">
+        <p>{returnDate(date)}</p>
         <p>{returnTime(date)}</p>
       </div>
     </div>
