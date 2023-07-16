@@ -1,49 +1,79 @@
-import { FC } from "react";
-import { prisma } from "../../../../db";
-import { returnAllCategories } from "@/utils/returnAllCategories";
+"use client";
 
-interface InputProps {}
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
-const Input: FC<InputProps> = async ({}) => {
-  const categories = await returnAllCategories();
+interface InputProps {
+  isModalOpen: boolean;
+  setIsModelOpen: () => void;
+}
+
+export default function AddNewInput({
+  isModalOpen,
+  setIsModelOpen,
+}: InputProps) {
   return (
-    <dialog id="my_modal_4" className="modal">
-      <form
-        method="dialog"
-        className="modal-box w-11/12 max-w-5xl flex flex-col gap-8 justify-center items-center"
-      >
-        <h3 className="font-bold text-lg">New input!</h3>
-        <input
-          type="text"
-          placeholder="Location"
-          className="input input-bordered w-full max-w-xs"
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          className="input input-bordered w-full max-w-xs"
-        />
-        <select className="select select-bordered w-full max-w-xs">
-          <option disabled selected>
-            Select a category
-          </option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
+    <>
+      <Transition appear show={false} as={Fragment}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => console.log("test")}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
 
-        <div className="modal-action">
-          {/* if there is a button, it will close the modal */}
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Payment successful
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      Your payment has been successfully submitted. We’ve sent
+                      you an email with all of the details of your order.
+                    </p>
+                  </div>
 
-          <button className="btn btn-success">Submit</button>
-
-          <button className="btn btn-error">Close</button>
-        </div>
-      </form>
-    </dialog>
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={() => setIsModelOpen(false)}
+                    >
+                      Got it, thanks!
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+    </>
   );
-};
+}
 
-export default Input;
+// const categories = await returnAllCategories();
