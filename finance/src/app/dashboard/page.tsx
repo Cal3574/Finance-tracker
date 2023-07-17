@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import RecentSpends from "../components/recentSpends/RecentSpends";
+
 import StatsContainer from "../components/stats/StatsContainer";
 interface pageProps {}
 
