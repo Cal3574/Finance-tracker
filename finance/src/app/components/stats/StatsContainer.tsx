@@ -5,7 +5,7 @@ interface StatsContainerProps {}
 
 const StatsContainer: FC<StatsContainerProps> = ({}) => {
   return (
-    <div className=" flex flex-col h-80 md:w-[24rem] w-full m-4 gap-4">
+    <div className=" flex flex-col h-80 md:w-[32rem] w-full m-4 gap-4">
       <StatCard />
       <StatCard />
       <StatCard />

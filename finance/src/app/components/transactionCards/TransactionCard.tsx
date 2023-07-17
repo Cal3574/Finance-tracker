@@ -27,8 +27,8 @@ const TransactionCard: FC<TransactionCardProps> = ({
       </div>
 
       <div className="text-[10px] flex flex-col justify-center gap-2 items-center mr-4 absolute right-0 mt-auto mb-auto top-0 bottom-0 ">
-        <p>{returnDate(date)}</p>
-        <p>{returnTime(date)}</p>
+        {/* <p>{returnDate(date)}</p>
+        <p>{returnTime(date)}</p> */}
       </div>
     </div>
   );

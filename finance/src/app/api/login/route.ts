@@ -4,6 +4,7 @@ import * as bycrypt from "bcrypt";
 interface RequestBody {
   email: string;
   password: string;
+  token?: string;
 }
 
 interface UserProps {}
@@ -16,10 +17,6 @@ export async function POST(request: Request) {
       email: body.email,
     },
   });
-
-  console.log(user);
-
-  console.log(user, " user");
   if (user && (await bycrypt.compare(body.password, user.password))) {
     const { password, ...userWithoutPass } = user;
     const token = signJwtAccessToken({
