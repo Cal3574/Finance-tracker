@@ -1,4 +1,3 @@
-import Providers from "./Providers";
 import Footer from "./components/layout/Footer";
 
 import Nav from "./components/layout/Nav";
