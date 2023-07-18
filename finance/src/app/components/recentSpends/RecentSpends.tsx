@@ -8,8 +8,10 @@ interface RecentSpendsProps {
 }
 
 const RecentSpends = ({ userSpends }: RecentSpendsProps) => {
-  if (!userSpends) {
-    <h1>Loading..</h1>;
+  const { data: session } = useSession();
+
+  if (!session) {
+    return null;
   }
   return (
     <div className="bg-[#2D325A] rounded-xl h-80 md:w-[32rem] w-full m-4 flex flex-col">
