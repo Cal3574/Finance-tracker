@@ -1,7 +1,7 @@
 "use server";
-import prisma from "../../lib/prisma";
-import { verifyJwtAccessToken } from "@/lib/jwt";
 
+import { verifyJwtAccessToken } from "@/lib/jwt";
+import prisma from "@/lib/prisma";
 export async function returnAllUserSpends(id: any, token: any) {
   if (!token || !verifyJwtAccessToken(token)) {
     return new Response(

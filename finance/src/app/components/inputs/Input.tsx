@@ -1,6 +1,5 @@
 "use client";
 
-import useUserSession from "@/app/hooks/getUserSession";
 import { postNewTransaction } from "@/app/serverActions/postNewTransaction";
 import { returnAllCategories } from "@/app/serverActions/returnAllCategories";
 import { Dialog, Transition } from "@headlessui/react";
@@ -38,14 +37,14 @@ export default async function AddNewInput({
   });
   let [isPending, startTransition] = useTransition();
 
-  const getCategories = async () => {
-    const categories: CategoryProps[] = await returnAllCategories();
-    setCategories(categories);
-  };
+  // const getCategories = async () => {
+  //   const categories: CategoryProps[] = await returnAllCategories();
+  //   setCategories(categories);
+  // };
 
-  useEffect(() => {
-    getCategories();
-  }, []);
+  // useEffect(() => {
+  //   getCategories();
+  // }, []);
 
   const handleUserInput = (e: any) => {
     const { name, value } = e.target;
@@ -122,7 +121,7 @@ export default async function AddNewInput({
                       <label className="label">
                         <span className="label-text">Type of transaction?</span>
                       </label>
-                      <select
+                      {/* <select
                         className="select select-bordered"
                         name="category"
                         onChange={handleUserInput}
@@ -137,10 +136,10 @@ export default async function AddNewInput({
                             </option>
                           )
                         )}
-                      </select>
+                      </select> */}
                     </div>
                     <div className="mt-4">
-                      <button
+                      {/* <button
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         onClick={async () =>
@@ -148,9 +147,9 @@ export default async function AddNewInput({
                             postNewTransaction(spendInput);
                           })
                         }
-                      >
-                        Submit
-                      </button>
+                      > */}
+                      {/* Submit */}
+                      {/* </button> */}
                     </div>
                   </form>
                 </Dialog.Panel>

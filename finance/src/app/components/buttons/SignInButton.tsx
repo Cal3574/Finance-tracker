@@ -9,7 +9,7 @@ interface ButtonProps {}
 const Button: FC<ButtonProps> = ({}) => {
   const { data: session } = useSession();
 
-  console.log(session?.user);
+  console.log(session?.user, "testing");
   if (session && session.user) {
     return (
       <div>

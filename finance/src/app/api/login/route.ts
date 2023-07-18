@@ -1,5 +1,5 @@
 import { signJwtAccessToken } from "@/lib/jwt";
-import { prisma } from "../../../../db";
+import prisma from "@/lib/prisma";
 import * as bycrypt from "bcrypt";
 interface RequestBody {
   email: string;

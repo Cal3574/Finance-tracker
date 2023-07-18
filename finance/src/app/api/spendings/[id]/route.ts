@@ -1,4 +1,4 @@
-import { prisma } from "../../../../../db";
+import prisma from "@/lib/prisma";
 import { verifyJwtAccessToken } from "@/lib/jwt";
 export async function GET(
   request: Request,

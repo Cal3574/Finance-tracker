@@ -1,10 +1,10 @@
 import Footer from "./components/layout/Footer";
-
 import Nav from "./components/layout/Nav";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Input from "./components/inputs/Input";
 import { SessionProvider } from "next-auth/react";
+import { NextAuthProvider } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider>
+        <NextAuthProvider>
           <Nav />
 
           {children}
           <Footer />
-        </SessionProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );

@@ -25,7 +25,7 @@ const Nav: FC<NavProps> = ({}) => {
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img
-                  src={`https://api.dicebear.com/6.x/pixel-art/svg?seed=${session.user.name}`}
+                  src={`https://api.dicebear.com/6.x/pixel-art/svg?seed=${session?.user?.name}`}
                 />
               </div>
             </label>
