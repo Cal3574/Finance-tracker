@@ -21,7 +21,7 @@
     "apexcharts": "^3.41.0",
     "autoprefixer": "10.4.14",
     "bcrypt": "^5.1.0",
-    "daisyui": "^3.1.7",
+    "daisyui": "^3.2.1",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "jsonwebtoken": "^9.0.0",

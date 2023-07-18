@@ -27,7 +27,7 @@ const page = async ({}) => {
     );
   } else {
     return (
-      <div className="min-h-screen flex flex-wrap mx-auto justify-center pb-[100px] inset-x-0 mt-4">
+      <div className="flex flex-wrap mx-auto justify-center pb-[100px] inset-x-0 mt-4">
         <RecentSpends userSpends={allUserSpends ? allUserSpends : undefined} />
         <StatsContainer />
       </div>

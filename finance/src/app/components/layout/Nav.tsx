@@ -10,7 +10,7 @@ const Nav: FC<NavProps> = ({}) => {
   const { data: session, status } = useSession();
 
   return (
-    <div className="top-nav bg-[#2D325A] inset-x-0 top-0 flex justify-between px-4 h-24 mt-4 mx-0 m-0 ">
+    <div className="top-nav bg-[#2D325A] inset-x-0 top-0 flex justify-between px-4 h-24 mx-0 m-0 ">
       <div className="flex-1 mt-4 flex-col">
         <a className=" normal-case text-xl">FinanceTrack</a>
         <div className="mt-2">

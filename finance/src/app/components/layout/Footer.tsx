@@ -4,20 +4,21 @@ import { AiFillHome } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { RiAddFill } from "react-icons/ri";
 import AddNewInput from "../inputs/Input";
+import { useSession } from "next-auth/react";
 interface FooterProps {}
 
 const Footer: FC<FooterProps> = ({}) => {
   const [isModalOpen, setIsModelOpen] = useState<boolean>(false);
 
-  console.log(isModalOpen, "isModalOpen");
-
+  const { data: session } = useSession();
+  console.log(session);
   const handleModal = () => {
     setIsModelOpen(!isModalOpen);
   };
 
   return (
     <nav className="bottom-nav bg-[#2D325A] fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-2 h-20 m-0 w-full">
-      <AddNewInput setIsModelOpen={setIsModelOpen} isModalOpen={isModalOpen} />
+      <AddNewInput userId={session?.user?.id} />
       <div className="max-w-7xl mx-auto flex gap-10">
         <a
           href="/dashboard"
@@ -27,7 +28,7 @@ const Footer: FC<FooterProps> = ({}) => {
           <p className="text-xs">Dashboard</p>
         </a>
         <label htmlFor="my_modal_7" className="btn">
-          open modal
+          Add New
         </label>
 
         {/* <RiAddFill
