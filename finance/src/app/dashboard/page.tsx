@@ -1,8 +1,5 @@
-import { NextPage } from "next";
 import RecentSpends from "../components/recentSpends/RecentSpends";
 import StatsContainer from "../components/stats/StatsContainer";
-import prisma from "../../lib/prisma";
-import { verifyJwtAccessToken } from "@/lib/jwt";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { returnAllUserSpends } from "../serverActions/returnAllUserSpends";

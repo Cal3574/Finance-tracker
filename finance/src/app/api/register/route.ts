@@ -1,6 +1,5 @@
-import { prisma } from "../../../../db";
 import * as bycrypt from "bcrypt";
-
+import prisma from "@/lib/prisma";
 interface RequestBody {
   name: string;
   email: string;
