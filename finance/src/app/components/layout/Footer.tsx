@@ -27,16 +27,12 @@ const Footer: FC<FooterProps> = ({}) => {
           <AiFillHome size={26} />
           <p className="text-xs">Dashboard</p>
         </a>
-        <label htmlFor="my_modal_7" className="btn">
+        <label
+          htmlFor="my_modal_7"
+          className="text-center flex items-center cursor-pointer"
+        >
           Add New
         </label>
-
-        {/* <RiAddFill
-            size={52}
-            onClick={() => {
-              setIsModelOpen(true);
-            }}
-          /> */}
 
         <a className="text-white flex flex-col items-center gap-2 w-20 hover:text-teal-200">
           <CgProfile size={26} />

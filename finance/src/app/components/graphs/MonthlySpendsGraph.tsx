@@ -77,8 +77,8 @@ const MonthlySpendsGraph: FC<MonthlySpendsGraphProps> = ({
             {
               label: "Money Spent (£)",
               data: categoryTotals,
-              backgroundColor: ["#FFFFFF", "#6D696A", "#A2A7A5", "#DAE2DF"],
-              borderColor: ["#24445c"],
+              backgroundColor: ["#416788", "#7389AE", "#B5BAD0", "#81D2C7"],
+              borderColor: ["#ffffff"],
               borderWidth: 1,
             },
           ],
@@ -88,8 +88,13 @@ const MonthlySpendsGraph: FC<MonthlySpendsGraphProps> = ({
   }, []);
 
   return (
-    <div className="bg-[#2D325A] rounded-xl h-80 md:w-auto w-full m-4 ">
-      <Doughnut data={graphData} plugins={plugins} />
+    <div className="bg-[#2D325A] rounded-xl h-auto md:w-[24rem] w-full m-4">
+      <div>
+        <h1 className="text-2xl text-start m-2 p-4">Recent Transactions</h1>
+      </div>
+      <div className="p-4 flex justify-center">
+        <Doughnut data={graphData} plugins={plugins} options={{}} />
+      </div>
     </div>
   );
 };
