@@ -3,6 +3,8 @@
 import { verifyJwtAccessToken } from "@/lib/jwt";
 import prisma from "@/lib/prisma";
 export async function returnAllUserSpends(id: any, token: any) {
+  //can i get user session here?
+
   if (!token || !verifyJwtAccessToken(token)) {
     return new Response(
       JSON.stringify({

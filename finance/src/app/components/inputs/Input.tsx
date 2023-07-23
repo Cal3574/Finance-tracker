@@ -1,12 +1,14 @@
 "use client";
 
 import useUserSession from "@/app/hooks/getUserSession";
+import { useSpendCategories } from "@/app/hooks/useSpendCategories";
 import { postNewTransaction } from "@/app/serverActions/postNewTransaction";
 import { returnAllCategories } from "@/app/serverActions/returnAllCategories";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   Fragment,
   startTransition,
+  use,
   useEffect,
   useState,
   useTransition,
@@ -16,7 +18,7 @@ interface InputProps {
   userId: any;
 }
 
-interface CategoryProps {
+export interface CategoryProps {
   id: number;
   name: string;
 }
@@ -28,27 +30,15 @@ interface SpendProps {
 }
 
 export default function AddNewInput({ userId }: InputProps) {
-  const [categories, setCategories] = useState<CategoryProps[]>([]);
   const [spendInput, setSpendInput] = useState<SpendProps>({
     location: "",
     amount: 0,
     category: 0,
   });
 
-  console.log(userId, "userId");
+  const { categories } = useSpendCategories();
 
-  const getCategories = async () => {
-    const categories: CategoryProps[] = await returnAllCategories();
-    setCategories(categories);
-  };
-
-  useEffect(() => {
-    console.log(spendInput);
-  }, [spendInput]);
-
-  useEffect(() => {
-    getCategories();
-  }, []);
+  console.log(categories);
 
   if (!userId) {
     return null;
@@ -60,7 +50,6 @@ export default function AddNewInput({ userId }: InputProps) {
       ...prevState,
       [name]: value,
     }));
-    console.log(spendInput, "spendInput");
   };
 
   return (
