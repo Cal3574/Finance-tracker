@@ -6,7 +6,14 @@ import { returnAllUserSpends } from "../serverActions/returnAllUserSpends";
 import MonthlySpendsGraph from "../components/graphs/MonthlySpendsGraph";
 import { CategoryProps } from "../components/inputs/Input";
 import { returnAllCategories } from "../serverActions/returnAllCategories";
+import { deleteSpend } from "../serverActions/deleteSpend";
+import { postNewTransaction } from "../serverActions/postNewTransaction";
 interface pageProps {}
+interface SpendProps {
+  location: string;
+  amount: number;
+  category: number;
+}
 
 const page = async ({}) => {
   const session = await getServerSession(authOptions);
@@ -16,6 +23,15 @@ const page = async ({}) => {
     session?.user.token
   );
 
+  const deletePost = async (id: any) => {
+    "use server";
+    await deleteSpend(id);
+  };
+
+  const postNewSpend = async (spendInput: SpendProps, event: any) => {
+    "use server";
+    await postNewTransaction(spendInput);
+  };
   const categories: CategoryProps[] = await returnAllCategories();
 
   if (!allUserSpends) {
@@ -33,7 +49,11 @@ const page = async ({}) => {
   } else {
     return (
       <div className="flex flex-wrap mx-auto justify-center pb-[100px] inset-x-0 mt-4">
-        <RecentSpends userSpends={allUserSpends ? allUserSpends : undefined} />
+        <RecentSpends
+          userSpends={allUserSpends ? allUserSpends : undefined}
+          deletePost={deletePost}
+          postNewSpend={postNewSpend}
+        />
         <MonthlySpendsGraph
           userSpends={allUserSpends ? allUserSpends : undefined}
           session={session}

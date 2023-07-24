@@ -7,6 +7,9 @@ import { returnAllCategories } from "@/app/serverActions/returnAllCategories";
 import { CategoryProps } from "../inputs/Input";
 import { useSpendCategories } from "@/app/hooks/useSpendCategories";
 import { useReturnUserSpends } from "@/app/hooks/useReturnUserSpends";
+import { useHandleMonth } from "@/app/hooks/useManageSpends";
+import { monitorEventLoopDelay } from "perf_hooks";
+import { monthNames } from "@/app/constants/dates";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface MonthlySpendsGraphProps {
@@ -20,6 +23,19 @@ const MonthlySpendsGraph: FC<MonthlySpendsGraphProps> = ({
   session,
   categories,
 }) => {
+  const {
+    setSelectedMonth,
+    selectedMonth,
+    monthName,
+    handleMonthChange,
+    getMonthName,
+    spends,
+    totalSpends,
+    setSpends,
+  } = useHandleMonth({ userSpends });
+
+  console.log(totalSpends);
+
   const [graphData, setGraphData] = useState<any>({
     labels: [],
     datasets: [
@@ -33,36 +49,42 @@ const MonthlySpendsGraph: FC<MonthlySpendsGraphProps> = ({
     ],
   });
 
+  useEffect(() => {
+    console.log("spends");
+  }, [selectedMonth]);
+
   const plugins = [
     {
       id: "here comes your id for the specific plugin",
       beforeDraw: function (chart: any) {
-        var width = chart.width,
-          height = chart.height,
-          ctx = chart.ctx;
-        ctx.restore();
-        var fontSize = (height / 180).toFixed(2);
+        // ... Rest of the code ...
+      },
+      afterDraw: function (chart: any) {
+        // Update the text with the latest totalSpends value
+        const ctx = chart.ctx;
+        const width = chart.width;
+        const height = chart.height;
+        const fontSize = (height / 200).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
-        ctx.fillStyle = "white";
-        ctx.textBaseline = "top";
-        var text = "January",
-          textX = Math.round((width - ctx.measureText(text).width) / 2),
-          textY = height / 2;
+        ctx.fillStyle = "white ";
+        ctx.textBaseline = "";
+        const text = monthName;
+        const textX = Math.round((width - ctx.measureText(text).width) / 2);
+        const textY = height / 2;
         ctx.fillText(text, textX, textY);
-        ctx.save();
       },
     },
   ];
 
   useEffect(() => {
-    if (categories && userSpends) {
+    if (categories && spends) {
       const categoryNames = categories.map((category: CategoryProps) => {
         return category.name;
       });
 
       const categoryTotals = categories.map((category: CategoryProps) => {
         let total = 0;
-        userSpends.filter((spend: any) => {
+        spends.filter((spend: any) => {
           if (spend.categoryId === category.id) {
             total += spend.amount;
           }
@@ -85,15 +107,23 @@ const MonthlySpendsGraph: FC<MonthlySpendsGraphProps> = ({
         });
       }
     }
-  }, []);
+  }, [spends, totalSpends]);
 
   return (
     <div className="bg-[#2D325A] rounded-xl h-auto md:w-[24rem] w-full m-4">
-      <div>
-        <h1 className="text-2xl text-start m-2 p-4">Recent Transactions</h1>
+      <div className="flex items-center w-full">
+        <div className="w-full">
+          <h1 className="text-2xl text-start m-2 p-4">Monthly Overview</h1>
+          <p className="m-2 p-4">{`£${totalSpends}`} spent this month</p>
+        </div>
       </div>
       <div className="p-4 flex justify-center">
-        <Doughnut data={graphData} plugins={plugins} options={{}} />
+        <Doughnut
+          data={graphData}
+          plugins={plugins}
+          options={{}}
+          key={totalSpends}
+        />
       </div>
     </div>
   );

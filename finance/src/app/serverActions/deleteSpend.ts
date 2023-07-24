@@ -6,7 +6,8 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 
-export async function postNewTransaction(spendTransaction: any) {
+export async function deleteSpend(spendId: any) {
+  console.log("spendId", spendId);
   const session = await getServerSession(authOptions);
   if (!session?.user.token || !verifyJwtAccessToken(session.user.token)) {
     return new Response(
@@ -22,16 +23,13 @@ export async function postNewTransaction(spendTransaction: any) {
     );
   }
 
-  const newTransaction = await prisma.spendings.create({
-    data: {
-      location: spendTransaction.location,
-      amount: parseInt(spendTransaction.amount),
-      categoryId: parseInt(spendTransaction.category),
-      userId: session?.user?.id as number,
+  const deletedSpend = await prisma.spendings.delete({
+    where: {
+      id: spendId,
     },
   });
 
   revalidatePath("/dashboard");
 
-  return newTransaction;
+  return deletedSpend;
 }

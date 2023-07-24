@@ -5,6 +5,8 @@ import { useSpendCategories } from "@/app/hooks/useSpendCategories";
 import { postNewTransaction } from "@/app/serverActions/postNewTransaction";
 import { returnAllCategories } from "@/app/serverActions/returnAllCategories";
 import { Dialog, Transition } from "@headlessui/react";
+import { useRouter } from "next/navigation";
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import {
   Fragment,
   startTransition,
@@ -16,6 +18,7 @@ import {
 
 interface InputProps {
   userId: any;
+  postNewSpend?: any;
 }
 
 export interface CategoryProps {
@@ -29,12 +32,14 @@ interface SpendProps {
   category: number;
 }
 
-export default function AddNewInput({ userId }: InputProps) {
+export default function AddNewInput({ userId, postNewSpend }: InputProps) {
   const [spendInput, setSpendInput] = useState<SpendProps>({
     location: "",
     amount: 0,
     category: 0,
   });
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const { categories } = useSpendCategories();
 
@@ -105,13 +110,13 @@ export default function AddNewInput({ userId }: InputProps) {
             </div>
             <div className="mt-4">
               <button
-                type="submit"
+                type="reset"
                 className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                onClick={async () =>
-                  startTransition(() => {
-                    postNewTransaction(spendInput);
-                  })
-                }
+                onClick={async (e) => {
+                  e.preventDefault();
+                  await postNewSpend(spendInput);
+                  router.refresh();
+                }}
               >
                 Submit
               </button>
